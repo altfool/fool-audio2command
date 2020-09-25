@@ -4,7 +4,7 @@ import os, re
 
 ##======= extract keyword modules =============##
 keyword_module_file_postfix = ".py"
-# keyword_module_func_prefix = "keyword_"     # len('keyword_') = 8
+keyword_module_func_prefix = "keyword_"     # len('keyword_') = 8
 keyword_module_dir_name = "keyword_commands"
 keyword_module_dir_path = os.path.join(os.path.dirname(__file__), keyword_module_dir_name)
 keyword_module_candidate = os.listdir(keyword_module_dir_path)
@@ -23,5 +23,7 @@ mytext_list = re.split("\n|\t| ", mytext)
 mytext_stem = [item for item in mytext_list if item not in stopwords_list]
 print("stem text msg: {}".format(mytext_stem))
 
-
-keyword_commands.keyword_click()
+for idx, val in enumerate(mytext_stem):
+    if val in keyword_module_set:
+        # call corresponding module, folder.module.func
+        getattr(getattr(keyword_commands, val), keyword_module_func_prefix+val)(mytext_stem[idx:])

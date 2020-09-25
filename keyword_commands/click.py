@@ -1,4 +1,5 @@
 
 
-def keyword_click(kstr=""):
+def keyword_click(klist=[]):
     print("keyword func 'click' called")
+    print(klist)
